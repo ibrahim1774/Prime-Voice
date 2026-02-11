@@ -282,10 +282,10 @@ export default function DemoExperience({
 
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
-              href="#"
+              href="https://buy.stripe.com/5kQ3cu9i416e8Zc1vU3cc0d"
               className="rounded-xl bg-gold px-8 py-4 font-sans text-base font-semibold text-background transition-all duration-300 hover:bg-gold-light hover:scale-[1.02]"
             >
-              Get Started — $97/month
+              Get Started — $29/month
             </a>
             <a
               href="/"
@@ -294,6 +294,10 @@ export default function DemoExperience({
               Try Another Demo
             </a>
           </div>
+
+          <p className="mt-4 font-sans text-xs text-subtle">
+            *Additional charges apply based on call volume at $0.06–$0.13 per minute.
+          </p>
         </div>
       )}
     </div>

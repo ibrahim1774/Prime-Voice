@@ -29,7 +29,7 @@ export default function HeroSection() {
           While you&apos;re on the roof, your phone is ringing. Your next $10,000
           job just went to voicemail — and then to your competitor.{" "}
           <span className="text-white">
-            Prime answers every call, 24/7, like your best front desk employee.
+            PrimeVoice answers every call, 24/7, like your best front desk employee.
           </span>
         </p>
 
@@ -41,8 +41,15 @@ export default function HeroSection() {
           </span>
         </div>
 
+        {/* Generate CTA Headline */}
+        <h2 className="mt-8 mb-2 font-serif text-2xl font-bold text-white md:text-3xl lg:text-4xl">
+          Generate a Custom Voice Receptionist for
+          <br />
+          <span className="text-gold">Your Business Within 20 Seconds</span>
+        </h2>
+
         {/* Intake Form */}
-        <div className="mt-2">
+        <div className="mt-6">
           <IntakeForm />
         </div>
       </div>

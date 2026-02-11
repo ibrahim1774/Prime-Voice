@@ -4,8 +4,7 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl flex flex-col items-center gap-6 md:flex-row md:justify-between">
         <div className="flex items-center gap-2">
           <span className="font-serif text-lg font-semibold text-white">
-            Prime Contractor{" "}
-            <span className="text-gold">AI</span>
+            Prime<span className="text-gold">Voice</span>
           </span>
         </div>
 
@@ -23,7 +22,7 @@ export default function Footer() {
             Privacy
           </a>
           <a
-            href="mailto:hello@primecontractorai.com"
+            href="mailto:hello@primevoice.com"
             className="hover:text-muted transition-colors"
           >
             Contact
@@ -31,7 +30,7 @@ export default function Footer() {
         </div>
 
         <p className="font-sans text-sm text-subtle">
-          &copy; {new Date().getFullYear()} Prime Contractor AI
+          &copy; {new Date().getFullYear()} PrimeVoice
         </p>
       </div>
     </footer>

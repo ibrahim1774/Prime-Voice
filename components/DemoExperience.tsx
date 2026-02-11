@@ -305,12 +305,12 @@ export default function DemoExperience({
 
       {/* Bottom CTA — always visible */}
       <div className="shrink-0 pt-3 pb-1">
-        <a
-          href="https://buy.stripe.com/5kQ3cu9i416e8Zc1vU3cc0d"
+        <button
+          onClick={() => window.dispatchEvent(new Event("open-pricing-drawer"))}
           className="block w-full rounded-xl bg-gold py-3.5 text-center font-sans text-sm font-semibold text-background transition-all duration-300 hover:bg-gold-light"
         >
-          Get Your 24/7 AI Receptionist Set Up for Your Business
-        </a>
+          Get Your 24/7 AI Receptionist — $29/month
+        </button>
       </div>
     </div>
   );

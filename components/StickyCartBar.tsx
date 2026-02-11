@@ -46,6 +46,13 @@ export default function StickyCartBar() {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
 
+  // Listen for custom event to open drawer (used by demo page CTA)
+  useEffect(() => {
+    const handler = () => setIsDrawerOpen(true);
+    window.addEventListener("open-pricing-drawer", handler);
+    return () => window.removeEventListener("open-pricing-drawer", handler);
+  }, []);
+
   // Lock body scroll when drawer is open
   useEffect(() => {
     if (isDrawerOpen) {

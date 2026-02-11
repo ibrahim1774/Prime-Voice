@@ -27,10 +27,21 @@ export default function DemoExperience({
   const vapiRef = useRef<Vapi | null>(null);
   const transcriptEndRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll transcript
+  const transcriptContainerRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll transcript and handle window scrolling
   useEffect(() => {
+    // Scroll the inner container
     transcriptEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [transcript]);
+
+    // If call is active or just ended with transcript, ensure the whole container is visible
+    if (callStatus !== "idle" && transcript.length > 0) {
+      transcriptContainerRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  }, [transcript, callStatus]);
 
   // Initialize Vapi
   useEffect(() => {
@@ -194,11 +205,10 @@ export default function DemoExperience({
           <>
             <button
               onClick={toggleMute}
-              className={`rounded-full border px-6 py-4 font-sans text-sm font-medium transition-all duration-300 ${
-                isMuted
+              className={`rounded-full border px-6 py-4 font-sans text-sm font-medium transition-all duration-300 ${isMuted
                   ? "border-red-500/30 bg-red-500/10 text-red-400 hover:bg-red-500/20"
                   : "border-white/20 bg-charcoal text-white hover:border-white/40"
-              }`}
+                }`}
             >
               {isMuted ? "Unmute" : "Mute"}
             </button>
@@ -257,29 +267,50 @@ export default function DemoExperience({
       )}
 
       {/* Live Transcript */}
-      {transcript.length > 0 && (
-        <div className="gold-glow-border rounded-2xl bg-card p-6 mb-10">
-          <p className="font-sans text-xs uppercase tracking-[0.15em] text-subtle mb-5">
-            Live Transcript
-          </p>
-          <div className="max-h-96 overflow-y-auto space-y-4 pr-2 custom-scrollbar">
-            {transcript.map((entry, index) => (
-              <div
-                key={index}
-                className={
-                  entry.role === "assistant"
-                    ? "transcript-bubble-ai"
-                    : "transcript-bubble-user"
-                }
-              >
-                <p className="text-[11px] uppercase tracking-wider text-subtle mb-1 font-sans">
-                  {entry.role === "assistant" ? "AI Receptionist" : "You"}
-                </p>
-                <p className="font-sans text-sm text-white leading-relaxed">
-                  {entry.text}
+      {(transcript.length > 0 || callStatus === "active") && (
+        <div
+          ref={transcriptContainerRef}
+          className="gold-glow-border rounded-2xl bg-card p-6 mb-10 transition-all duration-500 transform scale-100"
+        >
+          <div className="flex items-center justify-between mb-5">
+            <p className="font-sans text-xs uppercase tracking-[0.15em] text-gold font-semibold">
+              Live Transcript
+            </p>
+            {callStatus === "active" && (
+              <div className="flex items-center gap-2">
+                <div className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="text-[10px] uppercase tracking-wider text-emerald-500/80 font-medium">Listening...</span>
+              </div>
+            )}
+          </div>
+
+          <div className="max-h-[450px] overflow-y-auto space-y-4 pr-2 custom-scrollbar min-h-[120px] flex flex-col">
+            {transcript.length === 0 ? (
+              <div className="flex-1 flex items-center justify-center py-8">
+                <p className="text-subtle font-sans text-sm italic">
+                  Waiting for conversation to begin...
                 </p>
               </div>
-            ))}
+            ) : (
+              transcript.map((entry, index) => (
+                <div
+                  key={index}
+                  className={
+                    entry.role === "assistant"
+                      ? "transcript-bubble-ai animate-fade-in-up"
+                      : "transcript-bubble-user animate-fade-in-up"
+                  }
+                  style={{ animationDelay: `${index * 0.05}s` }}
+                >
+                  <p className="text-[10px] uppercase tracking-wider text-gold/60 mb-1 font-sans font-bold">
+                    {entry.role === "assistant" ? "AI Receptionist" : "You"}
+                  </p>
+                  <p className="font-sans text-[15px] text-white leading-relaxed">
+                    {entry.text}
+                  </p>
+                </div>
+              ))
+            )}
             <div ref={transcriptEndRef} />
           </div>
         </div>

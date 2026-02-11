@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { usePathname } from "next/navigation";
 
 const BENEFITS = [
   "Never miss another lead or big job \u2014 24/7 call answering",
@@ -42,6 +43,8 @@ const STRIPE_URL = "https://buy.stripe.com/5kQ3cu9i416e8Zc1vU3cc0d";
 
 export default function StickyCartBar() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
 
   // Lock body scroll when drawer is open
   useEffect(() => {
@@ -61,39 +64,40 @@ export default function StickyCartBar() {
   return (
     <>
       {/* Sticky Bottom Bar */}
-      <div
-        className="fixed bottom-0 left-0 right-0 z-40 border-t border-gold/30 bg-background/95 backdrop-blur-md"
-        style={{
-          boxShadow: "0 -4px 20px rgba(201, 168, 76, 0.15)",
-        }}
-      >
-        <button
-          onClick={openDrawer}
-          className="flex w-full items-center justify-between px-4 py-3.5 md:px-8"
+      {!isHomePage && (
+        <div
+          className="fixed bottom-0 left-0 right-0 z-40 border-t border-gold/30 bg-background/95 backdrop-blur-md"
+          style={{
+            boxShadow: "0 -4px 20px rgba(201, 168, 76, 0.15)",
+          }}
         >
-          <p className="font-sans text-sm text-muted md:text-base">
-            <span className="hidden md:inline">
-              Add a 24/7 AI Receptionist to Your Business &mdash; Only{" "}
-              <span className="font-semibold text-gold">$29/month</span>
+          <button
+            onClick={openDrawer}
+            className="flex w-full items-center justify-between px-4 py-3.5 md:px-8"
+          >
+            <p className="font-sans text-sm text-muted md:text-base">
+              <span className="hidden md:inline">
+                Add a 24/7 AI Receptionist to Your Business &mdash; Only{" "}
+                <span className="font-semibold text-gold">$29/month</span>
+              </span>
+              <span className="md:hidden">
+                24/7 AI Receptionist &mdash;{" "}
+                <span className="font-semibold text-gold">$29/mo</span>
+              </span>
+            </p>
+            <span className="shrink-0 rounded-lg bg-gold px-5 py-2.5 font-sans text-sm font-semibold text-background transition-all duration-300 hover:bg-gold-light md:px-6">
+              Get Started
             </span>
-            <span className="md:hidden">
-              24/7 AI Receptionist &mdash;{" "}
-              <span className="font-semibold text-gold">$29/mo</span>
-            </span>
-          </p>
-          <span className="shrink-0 rounded-lg bg-gold px-5 py-2.5 font-sans text-sm font-semibold text-background transition-all duration-300 hover:bg-gold-light md:px-6">
-            Get Started
-          </span>
-        </button>
-      </div>
+          </button>
+        </div>
+      )}
 
       {/* Drawer Overlay + Panel */}
       <div
-        className={`fixed inset-0 z-50 transition-all duration-300 ${
-          isDrawerOpen
-            ? "visible opacity-100"
-            : "invisible opacity-0 pointer-events-none"
-        }`}
+        className={`fixed inset-0 z-50 transition-all duration-300 ${isDrawerOpen
+          ? "visible opacity-100"
+          : "invisible opacity-0 pointer-events-none"
+          }`}
       >
         {/* Backdrop */}
         <div
@@ -103,9 +107,8 @@ export default function StickyCartBar() {
 
         {/* Drawer Panel */}
         <div
-          className={`absolute bottom-0 left-0 right-0 max-h-[85vh] overflow-y-auto rounded-t-3xl border-t border-gold/20 bg-card custom-scrollbar transition-transform duration-300 ease-out ${
-            isDrawerOpen ? "translate-y-0" : "translate-y-full"
-          }`}
+          className={`absolute bottom-0 left-0 right-0 max-h-[85vh] overflow-y-auto rounded-t-3xl border-t border-gold/20 bg-card custom-scrollbar transition-transform duration-300 ease-out ${isDrawerOpen ? "translate-y-0" : "translate-y-full"
+            }`}
           style={{
             boxShadow: "0 -8px 40px rgba(201, 168, 76, 0.1)",
           }}
@@ -168,6 +171,22 @@ export default function StickyCartBar() {
                 ))}
               </div>
 
+              {/* CTA Button Moved to Middle */}
+              <div className="mt-10">
+                <a
+                  href={STRIPE_URL}
+                  className="block w-full rounded-xl bg-gold py-4 text-center font-sans text-base font-semibold text-background transition-all duration-300 hover:bg-gold-light hover:scale-[1.01] active:scale-[0.99]"
+                  style={{
+                    boxShadow: "0 0 20px rgba(201, 168, 76, 0.3)",
+                  }}
+                >
+                  Get Started
+                </a>
+                <p className="mt-3 text-center font-sans text-xs text-subtle italic">
+                  *Join 200+ contractors using PrimeVoice today
+                </p>
+              </div>
+
               {/* What's Included Table */}
               <div className="mt-10">
                 <h4 className="mb-4 font-sans text-xs uppercase tracking-[0.2em] text-gold">
@@ -177,9 +196,8 @@ export default function StickyCartBar() {
                   {INCLUDED_ITEMS.map((item, i) => (
                     <div
                       key={item.feature}
-                      className={`px-5 py-3.5 font-sans text-sm ${
-                        i % 2 === 0 ? "bg-card" : "bg-charcoal/50"
-                      }`}
+                      className={`px-5 py-3.5 font-sans text-sm ${i % 2 === 0 ? "bg-card" : "bg-charcoal/50"
+                        }`}
                     >
                       <p className="font-medium text-white">{item.feature}</p>
                       <p className="mt-0.5 text-muted">{item.detail}</p>
@@ -198,17 +216,6 @@ export default function StickyCartBar() {
                   Cancel anytime. No contracts.
                 </p>
               </div>
-
-              {/* CTA Button */}
-              <a
-                href={STRIPE_URL}
-                className="mt-8 block w-full rounded-xl bg-gold py-4 text-center font-sans text-base font-semibold text-background transition-all duration-300 hover:bg-gold-light hover:scale-[1.01] active:scale-[0.99]"
-                style={{
-                  boxShadow: "0 0 20px rgba(201, 168, 76, 0.3)",
-                }}
-              >
-                Continue
-              </a>
 
               {/* Disclaimer */}
               <p className="mt-4 text-center font-sans text-xs text-subtle">

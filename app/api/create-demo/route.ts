@@ -101,7 +101,8 @@ Return ONLY the system prompt text. No markdown formatting, no explanations, no 
     if (!vapiResponse.ok) {
       const vapiError = await vapiResponse.json().catch(() => ({}));
       console.error("Vapi API error:", vapiError);
-      throw new Error("Failed to create AI assistant");
+      const errorMessage = vapiError?.message || vapiError?.error || JSON.stringify(vapiError);
+      throw new Error(`Failed to create AI assistant: ${errorMessage}`);
     }
 
     const assistant = await vapiResponse.json();
@@ -116,10 +117,9 @@ Return ONLY the system prompt text. No markdown formatting, no explanations, no 
     if (error instanceof Anthropic.APIError) {
       return NextResponse.json(
         {
-          error:
-            "Our AI service is temporarily unavailable. Please try again in a moment.",
+          error: `AI service error: ${error.message}`,
         },
-        { status: 503 }
+        { status: error.status || 503 }
       );
     }
 

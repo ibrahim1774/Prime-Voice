@@ -72,12 +72,14 @@ export default function DemoExperience({
 
     vapi.on("error", (err: Record<string, unknown>) => {
       console.error("Vapi error:", err);
-      const message =
-        (err?.error as Record<string, unknown>)?.message ||
-        err?.message ||
-        err?.errorMessage ||
-        "Unknown connection error";
-      setError(`Call error: ${String(message)}`);
+      // Deeply extract message from nested Vapi error structure
+      let message = "Unknown connection error";
+      try {
+        message = JSON.stringify(err, null, 2);
+      } catch {
+        message = String(err);
+      }
+      setError(`Call error: ${message}`);
       setCallStatus("idle");
     });
 

@@ -72,9 +72,12 @@ export default function DemoExperience({
 
     vapi.on("error", (err: Record<string, unknown>) => {
       console.error("Vapi error:", err);
-      setError(
-        "Connection error. Please check your microphone permissions and try again."
-      );
+      const message =
+        (err?.error as Record<string, unknown>)?.message ||
+        err?.message ||
+        err?.errorMessage ||
+        "Unknown connection error";
+      setError(`Call error: ${String(message)}`);
       setCallStatus("idle");
     });
 
@@ -93,9 +96,9 @@ export default function DemoExperience({
       await vapiRef.current.start(assistantId);
     } catch (err) {
       console.error("Failed to start call:", err);
-      setError(
-        "Failed to start call. Please allow microphone access and try again."
-      );
+      const message =
+        err instanceof Error ? err.message : "Unknown error starting call";
+      setError(`Failed to start call: ${message}`);
       setCallStatus("idle");
     }
   }, [assistantId]);

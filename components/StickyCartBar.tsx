@@ -189,6 +189,11 @@ export default function StickyCartBar() {
                 >
                   Get Started
                 </a>
+                <p className="mt-3 text-center font-sans text-xs text-subtle">
+                  *Additional minor charges apply depending on how many minutes
+                  used a month&mdash; more calls caught means more potential
+                  jobs.
+                </p>
               </div>
 
               {/* What's Included Table */}
@@ -220,12 +225,6 @@ export default function StickyCartBar() {
                   Cancel anytime. No contracts.
                 </p>
               </div>
-
-              {/* Disclaimer */}
-              <p className="mt-4 text-center font-sans text-xs text-subtle">
-                *Additional charges apply based on the number of calls the
-                system handles, billed at $0.06&ndash;$0.13 per minute.
-              </p>
             </div>
           </div>
         </div>

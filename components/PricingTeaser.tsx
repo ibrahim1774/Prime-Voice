@@ -11,12 +11,21 @@ const FEATURES = [
 
 export default function PricingTeaser() {
   return (
-    <section className="px-4 py-28">
-      <div className="mx-auto max-w-2xl">
+    <section className="px-4 py-28 relative section-glow-divider overflow-hidden">
+      {/* Ambient glow behind pricing card */}
+      <div
+        className="ambient-orb animate-glow-pulse"
+        style={{ top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "500px", height: "500px", background: "rgba(201, 168, 76, 0.03)" }}
+      />
+      {/* Floating particles */}
+      <div className="particle particle-sm animate-float-particle" style={{ top: "10%", left: "20%" }} />
+      <div className="particle particle-md animate-float-particle-delayed" style={{ top: "80%", right: "25%" }} />
+
+      <div className="relative mx-auto max-w-2xl">
         <ScrollReveal>
-          <div className="gold-glow-border rounded-3xl bg-card p-10 text-center md:p-14 relative overflow-hidden">
+          <div className="gold-glow-border rounded-3xl p-10 text-center md:p-14 relative overflow-hidden">
             {/* Subtle radial glow inside card */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(201,168,76,0.04)_0%,transparent_60%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(201,168,76,0.06)_0%,transparent_50%)]" />
 
             <div className="relative">
               <p className="font-sans text-sm uppercase tracking-[0.25em] text-gold mb-6">

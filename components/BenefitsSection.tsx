@@ -105,8 +105,17 @@ const BENEFITS = [
 
 export default function BenefitsSection() {
   return (
-    <section className="px-4 py-28 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-charcoal/50 to-transparent" />
+    <section className="px-4 py-28 relative section-glow-divider overflow-hidden">
+      {/* Depth gradient */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(20,20,20,0.9)_0%,rgba(10,10,10,1)_70%)]" />
+      {/* Ambient orb */}
+      <div
+        className="ambient-orb animate-glow-pulse"
+        style={{ top: "20%", right: "20%", width: "400px", height: "400px", background: "rgba(201, 168, 76, 0.025)", animationDelay: "1s" }}
+      />
+      {/* Floating particles */}
+      <div className="particle particle-sm animate-float-particle" style={{ top: "10%", right: "25%" }} />
+      <div className="particle particle-md animate-float-particle-slow" style={{ top: "70%", left: "15%" }} />
 
       <div className="relative mx-auto max-w-6xl">
         <ScrollReveal className="text-center mb-20">
@@ -121,8 +130,8 @@ export default function BenefitsSection() {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {BENEFITS.map((benefit) => (
             <ScrollReveal key={benefit.title}>
-              <div className="gold-glow-border rounded-2xl bg-card p-6 md:p-8 h-full transition-all duration-500 hover:bg-card-hover">
-                <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-gold/10 text-gold">
+              <div className="gold-glow-border rounded-2xl p-6 md:p-8 h-full transition-all duration-500">
+                <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-gold/10 text-gold" style={{ boxShadow: "0 0 12px rgba(201, 168, 76, 0.1)" }}>
                   {benefit.icon}
                 </div>
                 <h3 className="font-serif text-lg font-semibold text-white md:text-xl">

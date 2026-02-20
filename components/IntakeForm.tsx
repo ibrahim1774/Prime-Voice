@@ -110,13 +110,13 @@ export default function IntakeForm() {
   }
 
   const inputClasses =
-    "w-full rounded-xl border border-white/10 bg-charcoal px-5 py-4 font-sans text-white placeholder:text-subtle focus:border-gold/50 focus:ring-1 focus:ring-gold/50 transition-all duration-300";
+    "w-full rounded-xl border border-white/[0.07] bg-charcoal/70 backdrop-blur-sm px-5 py-4 font-sans text-white placeholder:text-subtle focus:border-gold/40 focus:ring-1 focus:ring-gold/30 focus:bg-charcoal/90 transition-all duration-300";
 
   return (
     <>
       <LoadingOverlay isVisible={isLoading} />
 
-      <div className="gold-glow-border mx-auto max-w-lg rounded-2xl bg-card/80 backdrop-blur-sm p-8 transition-all duration-500">
+      <div className="gold-glow-border mx-auto max-w-lg rounded-2xl p-8 transition-all duration-500">
         <form onSubmit={handleSubmit} className="space-y-5 text-left">
           <div>
             <input

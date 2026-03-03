@@ -37,6 +37,11 @@ const INCLUDED_ITEMS = [
     detail:
       "We tailor the AI specifically to your business, services, and customer base",
   },
+  {
+    feature: "Free Custom Website",
+    detail:
+      "A professionally designed website for your business \u2014 included at no extra cost",
+  },
 ];
 
 const STRIPE_URL = "https://buy.stripe.com/5kQ3cu9i416e8Zc1vU3cc0d";

@@ -192,6 +192,13 @@ export default function HeroSection() {
           Business
         </p>
 
+        {/* Free Website Offer */}
+        <div className="mx-auto mt-4 inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/5 px-5 py-2">
+          <span className="font-sans text-sm text-gold font-semibold">
+            Get your receptionist today &amp; receive a <span className="uppercase text-white bg-gold/20 px-1.5 py-0.5 rounded">Free</span> custom website for your business.
+          </span>
+        </div>
+
         {/* Intake Form */}
         <div className="mt-4 md:mt-6">
           <IntakeForm />

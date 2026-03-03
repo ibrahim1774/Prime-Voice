@@ -152,6 +152,13 @@ export default function DemoExperience({
           about your services, try to book an appointment, or see how it handles
           tough questions.
         </p>
+
+        {/* Free Website Offer */}
+        <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/5 px-4 py-1.5">
+          <span className="font-sans text-xs text-gold font-semibold">
+            Limited offer: Get your receptionist today &amp; receive a <span className="uppercase text-white bg-gold/20 px-1 py-0.5 rounded text-[10px]">Free</span> custom website.
+          </span>
+        </div>
       </div>
 
       {/* Call Controls */}

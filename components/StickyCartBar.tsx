@@ -4,14 +4,10 @@ import { useState, useEffect, useCallback } from "react";
 import { usePathname } from "next/navigation";
 
 const BENEFITS = [
-  "Never miss another lead or big job \u2014 24/7 call answering",
-  "Capture every caller\u2019s details automatically",
-  "Professional first impression on every call",
-  "Smart appointment scheduling built in",
-  "After-hours and emergency call coverage",
-  "Custom-trained AI that knows your specific business and services",
-  "Dedicated lead follow-up app",
-  "Replace your expensive answering service",
+  "24/7 call answering \u2014 don\u2019t miss a lead",
+  "Books jobs automatically",
+  "Handles after-hours & weekend calls",
+  "Custom-trained for your business",
 ];
 
 const INCLUDED_ITEMS = [
@@ -165,16 +161,13 @@ export default function StickyCartBar() {
 
               {/* Header */}
               <h3 className="text-center font-serif text-xl font-bold leading-snug text-white md:text-2xl">
-                A Smart AI Receptionist That Answers Calls, Books Appointments, to Your Phone{" "}
-                <span className="text-gold">
-                  So It Helps You Not Lose a Job to a Competitor.
-                </span>
+                Every Missed Call Could Be a{" "}
+                <span className="text-gold">Lost $1,000 Job</span>
               </h3>
               <div className="mx-auto mt-3 h-px w-20 bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
               <p className="mt-3 text-center font-sans text-sm leading-relaxed text-muted">
-                Every missed call could be worth $1,000&ndash;$10,000 in lost
-                jobs &mdash; calls you&apos;re probably missing. Implement a
-                foundation part of your business.
+                Every missed call could be worth $1,000&ndash;$10,000.
+                This can help make sure you don&apos;t miss another opportunity.
               </p>
 
               {/* Benefits List */}
@@ -201,8 +194,19 @@ export default function StickyCartBar() {
                 ))}
               </div>
 
-              {/* CTA Button Moved to Middle */}
-              <div className="mt-10">
+              {/* Urgency Line */}
+              <p className="mt-6 text-center font-sans text-xs font-semibold text-amber-400">
+                ⚠️ Most contractors miss 30–50% of inbound calls
+              </p>
+
+              {/* CTA */}
+              <div className="mt-6">
+                <p className="text-center font-sans text-sm font-semibold text-white mb-1">
+                  Start for $29/month — cancel anytime
+                </p>
+                <p className="text-center font-sans text-xs text-subtle mb-4">
+                  No setup fees • Takes 2 minutes
+                </p>
                 <button
                   onClick={handleCheckout}
                   disabled={isCheckingOut}
@@ -211,12 +215,10 @@ export default function StickyCartBar() {
                     boxShadow: "0 0 20px rgba(201, 168, 76, 0.3)",
                   }}
                 >
-                  {isCheckingOut ? "Redirecting..." : "Get Started — $29/month"}
+                  {isCheckingOut ? "Redirecting..." : "Set This Up For My Business"}
                 </button>
                 <p className="mt-3 text-center font-sans text-xs text-subtle">
-                  *Additional minor charges apply depending on how many minutes
-                  used a month&mdash; more calls caught means more potential
-                  jobs.
+                  *Additional minor charges apply depending on call volume.
                 </p>
               </div>
 

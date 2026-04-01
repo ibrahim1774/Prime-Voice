@@ -143,14 +143,12 @@ export default function DemoExperience({
         </div>
 
         <h1 className="font-serif text-xl font-bold text-white md:text-3xl">
-          Your AI Receptionist is Ready,{" "}
           <span className="text-gold">{businessName}</span>
+          {" "}— Stop Missing Calls From Customers Ready To Book
         </h1>
 
         <p className="mt-2 font-sans text-sm text-muted max-w-lg mx-auto leading-relaxed">
-          Start a live call with your custom AI receptionist. Speak naturally — ask
-          about your services, try to book an appointment, or see how it handles
-          tough questions.
+          Call your AI receptionist like a real customer. Ask for pricing, book a job, or try to break it.
         </p>
 
       </div>
@@ -176,7 +174,7 @@ export default function DemoExperience({
                   d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                 />
               </svg>
-              Call Your Receptionist
+              Call It Like a Real Customer
             </span>
           </button>
         )}
@@ -240,6 +238,20 @@ export default function DemoExperience({
           </button>
         )}
       </div>
+
+      {/* Guided prompts — visible when idle or ended */}
+      {(callStatus === "idle" || callStatus === "ended") && (
+        <div className="text-center mb-4 shrink-0">
+          <p className="font-sans text-xs text-subtle mb-2">Try saying:</p>
+          <div className="flex flex-wrap justify-center gap-2">
+            {['"I need a quote"', '"Are you available today?"', '"Do you do emergency jobs?"'].map((prompt) => (
+              <span key={prompt} className="rounded-full border border-gold/20 bg-gold/5 px-3 py-1 font-sans text-xs text-gold">
+                {prompt}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Active call indicator */}
       {callStatus === "active" && (
@@ -306,11 +318,19 @@ export default function DemoExperience({
 
       {/* Bottom CTA — always visible */}
       <div className="shrink-0 pt-3 pb-1">
+        <p className="text-center font-sans text-xs text-subtle mb-2">
+          Start for $29/month — cancel anytime
+        </p>
         <button
           onClick={() => window.dispatchEvent(new Event("open-pricing-drawer"))}
-          className="block w-full rounded-xl bg-gold py-3.5 text-center font-sans text-sm font-semibold text-background transition-all duration-300 hover:bg-gold-light"
+          className={`block w-full rounded-xl bg-gold text-center font-sans font-semibold text-background transition-all duration-300 hover:bg-gold-light ${
+            callStatus === "idle"
+              ? "py-3 text-sm opacity-70"
+              : "py-4 text-base hover:scale-[1.01] active:scale-[0.99]"
+          }`}
+          style={callStatus !== "idle" ? { boxShadow: "0 0 20px rgba(201, 168, 76, 0.35)" } : {}}
         >
-          Implement for {businessName} — $29/month
+          Set This Up For My {businessName}
         </button>
       </div>
     </div>

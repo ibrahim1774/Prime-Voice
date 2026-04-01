@@ -316,7 +316,7 @@ export default function DemoExperience({
           onClick={() => window.dispatchEvent(new Event("open-pricing-drawer"))}
           className="block w-full rounded-xl bg-gold py-3.5 text-center font-sans text-sm font-semibold text-background transition-all duration-300 hover:bg-gold-light"
         >
-          Implement for {businessName} — 3-Day Free Trial, $29/month
+          Implement for {businessName} — $29/month
         </button>
       </div>
     </div>

@@ -27,7 +27,6 @@ export async function POST(request: NextRequest) {
         },
       ],
       subscription_data: {
-        trial_period_days: 3,
         metadata: { businessName },
       },
       success_url: "https://primehubagency.com/success-page-1",

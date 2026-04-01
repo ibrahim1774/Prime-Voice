@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import ScrollReveal from "./ScrollReveal";
 
 const FEATURES = [
@@ -10,6 +13,26 @@ const FEATURES = [
 ];
 
 export default function PricingTeaser() {
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
+
+  async function handleCheckout() {
+    if (isCheckingOut) return;
+    setIsCheckingOut(true);
+    try {
+      const businessName =
+        new URLSearchParams(window.location.search).get("businessName") || "";
+      const res = await fetch("/api/create-checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ businessName }),
+      });
+      const data = await res.json();
+      if (data.url) window.location.href = data.url;
+    } catch {
+      setIsCheckingOut(false);
+    }
+  }
+
   return (
     <section className="px-4 py-28 relative section-glow-divider overflow-hidden">
       {/* Ambient glow behind pricing card */}
@@ -73,12 +96,13 @@ export default function PricingTeaser() {
                 ))}
               </div>
 
-              <a
-                href="https://buy.stripe.com/5kQ3cu9i416e8Zc1vU3cc0d"
-                className="mt-10 inline-block rounded-xl bg-gold px-10 py-4 font-sans text-base font-semibold text-background transition-all duration-300 hover:bg-gold-light hover:scale-[1.02] active:scale-[0.98]"
+              <button
+                onClick={handleCheckout}
+                disabled={isCheckingOut}
+                className="mt-10 inline-block rounded-xl bg-gold px-10 py-4 font-sans text-base font-semibold text-background transition-all duration-300 hover:bg-gold-light hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
-                Get Started
-              </a>
+                {isCheckingOut ? "Redirecting..." : "Get Started"}
+              </button>
 
               <p className="mt-4 font-sans text-xs text-subtle">
                 Or{" "}

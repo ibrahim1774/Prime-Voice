@@ -44,12 +44,29 @@ const INCLUDED_ITEMS = [
   },
 ];
 
-const STRIPE_URL = "https://buy.stripe.com/5kQ3cu9i416e8Zc1vU3cc0d";
-
 export default function StickyCartBar() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
   const pathname = usePathname();
   const isHomePage = pathname === "/";
+
+  async function handleCheckout() {
+    if (isCheckingOut) return;
+    setIsCheckingOut(true);
+    try {
+      const businessName =
+        new URLSearchParams(window.location.search).get("businessName") || "";
+      const res = await fetch("/api/create-checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ businessName }),
+      });
+      const data = await res.json();
+      if (data.url) window.location.href = data.url;
+    } catch {
+      setIsCheckingOut(false);
+    }
+  }
 
   // Listen for custom event to open drawer (used by demo page CTA)
   useEffect(() => {
@@ -191,15 +208,16 @@ export default function StickyCartBar() {
 
               {/* CTA Button Moved to Middle */}
               <div className="mt-10">
-                <a
-                  href={STRIPE_URL}
-                  className="block w-full rounded-xl bg-gold py-4 text-center font-sans text-base font-semibold text-background transition-all duration-300 hover:bg-gold-light hover:scale-[1.01] active:scale-[0.99]"
+                <button
+                  onClick={handleCheckout}
+                  disabled={isCheckingOut}
+                  className="block w-full rounded-xl bg-gold py-4 text-center font-sans text-base font-semibold text-background transition-all duration-300 hover:bg-gold-light hover:scale-[1.01] active:scale-[0.99] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
                   style={{
                     boxShadow: "0 0 20px rgba(201, 168, 76, 0.3)",
                   }}
                 >
-                  Start Your 3-Day Free Trial
-                </a>
+                  {isCheckingOut ? "Redirecting..." : "Start Your 3-Day Free Trial"}
+                </button>
                 <p className="mt-3 text-center font-sans text-xs text-subtle">
                   *Additional minor charges apply depending on how many minutes
                   used a month&mdash; more calls caught means more potential

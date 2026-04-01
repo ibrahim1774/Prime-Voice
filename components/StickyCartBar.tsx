@@ -41,6 +41,13 @@ export default function StickyCartBar() {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
 
+  const priceConfig =
+    pathname === "/1"
+      ? { price: 19, label: "$19/mo", labelLong: "$19/month", trialDays: 0, trialText: "" }
+      : pathname === "/2"
+      ? { price: 29, label: "$29/mo", labelLong: "$29/month", trialDays: 3, trialText: " — 3-day trial" }
+      : { price: 29, label: "$29/mo", labelLong: "$29/month", trialDays: 0, trialText: "" };
+
   async function handleCheckout() {
     if (isCheckingOut) return;
     setIsCheckingOut(true);
@@ -50,7 +57,7 @@ export default function StickyCartBar() {
       const res = await fetch("/api/create-checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ businessName }),
+        body: JSON.stringify({ businessName, price: priceConfig.price, trialDays: priceConfig.trialDays }),
       });
       const data = await res.json();
       if (data.url) window.location.href = data.url;
@@ -98,11 +105,11 @@ export default function StickyCartBar() {
             <p className="font-sans text-sm text-muted md:text-base">
               <span className="hidden md:inline">
                 Add a 24/7 AI Receptionist to Your Business &mdash; Only{" "}
-                <span className="font-semibold text-gold">$29/month</span>
+                <span className="font-semibold text-gold">{priceConfig.labelLong}</span>
               </span>
               <span className="md:hidden">
                 24/7 AI Receptionist &mdash;{" "}
-                <span className="font-semibold text-gold">$29/mo</span>
+                <span className="font-semibold text-gold">{priceConfig.label}</span>
               </span>
             </p>
             <span className="shrink-0 rounded-lg bg-gold px-5 py-2.5 font-sans text-sm font-semibold text-background transition-all duration-300 hover:bg-gold-light md:px-6">
@@ -202,7 +209,7 @@ export default function StickyCartBar() {
               {/* CTA */}
               <div className="mt-6">
                 <p className="text-center font-sans text-sm font-semibold text-white mb-1">
-                  Start for $29/month — cancel anytime
+                  Start for {priceConfig.labelLong}{priceConfig.trialText} — cancel anytime
                 </p>
                 <p className="text-center font-sans text-xs text-subtle mb-4">
                   No setup fees • Takes 2 minutes
@@ -244,11 +251,11 @@ export default function StickyCartBar() {
               {/* Price */}
               <div className="mt-10 text-center">
                 <p className="font-serif text-5xl font-bold text-gold md:text-6xl">
-                  $29
+                  ${priceConfig.price}
                   <span className="text-2xl text-gold/60">/month</span>
                 </p>
                 <p className="mt-2 font-sans text-sm text-muted">
-                  Cancel anytime. No contracts.
+                  {priceConfig.trialDays > 0 ? `${priceConfig.trialDays}-day free trial. ` : ""}Cancel anytime. No contracts.
                 </p>
               </div>
             </div>

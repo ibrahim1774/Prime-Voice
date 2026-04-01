@@ -7,6 +7,8 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json().catch(() => ({}));
     const businessName: string = body.businessName || "";
+    const unitAmount: number = body.price ? Math.round(body.price * 100) : 2900;
+    const trialDays: number = body.trialDays || 0;
 
     const session = await stripe.checkout.sessions.create({
       mode: "subscription",
@@ -20,7 +22,7 @@ export async function POST(request: NextRequest) {
                 ? `AI Receptionist for ${businessName}`
                 : "AI Receptionist — 24/7 call answering for your business",
             },
-            unit_amount: 2900,
+            unit_amount: unitAmount,
             recurring: { interval: "month" },
           },
           quantity: 1,
@@ -28,6 +30,7 @@ export async function POST(request: NextRequest) {
       ],
       subscription_data: {
         metadata: { businessName },
+        ...(trialDays > 0 ? { trial_period_days: trialDays } : {}),
       },
       success_url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://www.primevoiceai.org"}/thank-you`,
       cancel_url:

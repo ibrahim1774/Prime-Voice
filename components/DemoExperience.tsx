@@ -310,13 +310,6 @@ export default function DemoExperience({
         </div>
       </div>
 
-      {/* Money-back guarantee banner */}
-      <div className="shrink-0 mt-3 rounded-lg bg-red-600 px-4 py-2.5 text-center">
-        <p className="font-sans text-xs font-semibold text-white">
-          100% Money-Back Guarantee — Not satisfied? Get a full refund.
-        </p>
-      </div>
-
       {/* Bottom CTA — always visible */}
       <div className="shrink-0 pt-3 pb-1">
         <button

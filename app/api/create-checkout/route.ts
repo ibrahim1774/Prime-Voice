@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
       subscription_data: {
         metadata: { businessName },
       },
-      success_url: "https://primehubagency.com/success-page-1",
+      success_url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://www.primevoiceai.org"}/thank-you`,
       cancel_url:
         process.env.NEXT_PUBLIC_SITE_URL || "https://www.primevoiceai.org",
       metadata: { businessName },

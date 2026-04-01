@@ -183,7 +183,7 @@ export default function IntakeForm() {
           </button>
 
           <p className="text-center text-xs text-subtle font-sans">
-            No credit card required. Takes less than 60 seconds.
+            Takes less than 60 seconds.
           </p>
         </form>
       </div>

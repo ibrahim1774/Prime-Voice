@@ -2,28 +2,28 @@ import ScrollReveal from "./ScrollReveal";
 
 const STATS = [
   {
-    stat: "62%",
-    headline: "of callers hang up if no one answers",
+    stat: "40%",
+    headline: "of calls to contractors go unanswered",
     detail:
-      "They don\u2019t leave a voicemail. They call the next contractor on the list.",
+      "The average contractor misses nearly half of all incoming calls. Each one of those could be a $2,000, $5,000, or even $10,000 job — gone to your competitor in seconds.",
   },
   {
-    stat: "$2,600",
-    headline: "average value of a missed contracting lead",
+    stat: "80%",
+    headline: "of callers won't leave a voicemail",
     detail:
-      "Plumbing emergencies. HVAC installs. Roof repairs. One missed call can cost more than a month of PrimeVoice.",
+      "Your voicemail isn't cutting it. Eight out of ten callers will hang up and call the next contractor on the list. By the time you call back, they've already booked someone else.",
   },
   {
-    stat: "nights",
-    headline: "weekends & holidays \u2014 calls don\u2019t stop",
+    stat: "$500",
+    headline: "per month for an answering service",
     detail:
-      "Half of homeowner calls come outside business hours. If you\u2019re not answering, your competitor is.",
+      "Traditional answering services cost $300–500/month and still put callers on hold. They don't know your business, can't book appointments, and call in sick on Mondays.",
   },
   {
-    stat: "$0",
-    headline: "is what voicemail earns you",
+    stat: "24/7",
+    headline: "coverage that never sleeps",
     detail:
-      "80% of callers won\u2019t leave a message. They want to talk to someone now. PrimeVoice answers instantly.",
+      "PrimeVoice answers instantly, every time. It knows your business, books appointments, takes messages, and never misses a shift. Nights, weekends, holidays — always on.",
   },
 ];
 
@@ -48,8 +48,8 @@ export default function PainPoints() {
             The Problem
           </p>
           <h2 className="font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl">
-            You&apos;re Losing Jobs{" "}
-            <span className="text-gold">Right Now</span>
+            Every Missed Call Costs You{" "}
+            <span className="text-gold">Money</span>
           </h2>
         </ScrollReveal>
 

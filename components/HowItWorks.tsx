@@ -5,19 +5,19 @@ const STEPS = [
     number: "01",
     title: "Tell Us About Your Business",
     description:
-      "Enter your business name and what you do. Takes 30 seconds.",
+      "Your business name, phone number, and what you do. That\u2019s it.",
   },
   {
     number: "02",
-    title: "We Build Your AI Receptionist",
+    title: "We Build Your Receptionist",
     description:
-      "Our AI instantly creates a custom receptionist trained on your services.",
+      "In seconds, we create a custom AI receptionist trained on your services.",
   },
   {
     number: "03",
-    title: "Test It Live, Right Now",
+    title: "Talk To It Right Now",
     description:
-      "Talk to your receptionist right in your browser. No downloads. No setup.",
+      "Call it from your browser. Hear how it handles a real customer call.",
   },
 ];
 
@@ -39,8 +39,8 @@ export default function HowItWorks() {
             How It Works
           </p>
           <h2 className="font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl">
-            Up and Running in{" "}
-            <span className="text-gold">60 Seconds</span>
+            Live in{" "}
+            <span className="text-gold">30 Seconds</span>
           </h2>
         </ScrollReveal>
 

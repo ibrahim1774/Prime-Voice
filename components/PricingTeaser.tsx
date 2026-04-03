@@ -4,12 +4,10 @@ import { useState } from "react";
 import ScrollReveal from "./ScrollReveal";
 
 const FEATURES = [
-  "Dedicated AI receptionist for your business",
-  "24/7 coverage — nights, weekends, holidays",
-  "Appointment booking & scheduling",
-  "Call summaries & transcripts",
-  "Dedicated phone number",
-  "Cancel anytime — no contracts",
+  "Custom AI receptionist for your business",
+  "24/7 coverage \u2014 nights, weekends, holidays",
+  "Dedicated phone number & lead capture app",
+  "Cancel anytime \u2014 no contracts, no setup fees",
 ];
 
 export default function PricingTeaser() {
@@ -38,11 +36,24 @@ export default function PricingTeaser() {
       {/* Ambient glow behind pricing card */}
       <div
         className="ambient-orb animate-glow-pulse"
-        style={{ top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "500px", height: "500px", background: "rgba(201, 168, 76, 0.03)" }}
+        style={{
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "500px",
+          height: "500px",
+          background: "rgba(201, 168, 76, 0.03)",
+        }}
       />
       {/* Floating particles */}
-      <div className="particle particle-sm animate-float-particle" style={{ top: "10%", left: "20%" }} />
-      <div className="particle particle-md animate-float-particle-delayed" style={{ top: "80%", right: "25%" }} />
+      <div
+        className="particle particle-sm animate-float-particle"
+        style={{ top: "10%", left: "20%" }}
+      />
+      <div
+        className="particle particle-md animate-float-particle-delayed"
+        style={{ top: "80%", right: "25%" }}
+      />
 
       <div className="relative mx-auto max-w-2xl">
         <ScrollReveal>
@@ -55,8 +66,8 @@ export default function PricingTeaser() {
                 Simple Pricing
               </p>
 
-              <h2 className="font-serif text-4xl font-bold text-white md:text-5xl">
-                Starting at
+              <h2 className="font-serif text-3xl font-bold text-white md:text-4xl">
+                Try It First. Then Start for
               </h2>
               <p className="mt-2 font-serif text-7xl font-bold text-gold md:text-8xl">
                 $29
@@ -64,12 +75,13 @@ export default function PricingTeaser() {
               </p>
 
               <p className="mt-6 font-sans text-muted max-w-md mx-auto">
-                Everything you need to never miss a call again. No setup fees.
-                No hidden charges. Cancel anytime.
+                Hear your AI receptionist handle a real call. If you like what
+                you hear, set it up for $29/month. No contracts. Cancel anytime.
               </p>
 
               <p className="mt-2 font-sans text-xs text-subtle">
-                *Additional charges apply based on call volume at $0.06–$0.13 per minute.
+                *Additional charges apply based on call volume at $0.06&ndash;$0.13
+                per minute.
               </p>
 
               <div className="mt-10 space-y-3 text-left max-w-sm mx-auto">
@@ -96,20 +108,21 @@ export default function PricingTeaser() {
                 ))}
               </div>
 
-              <button
-                onClick={handleCheckout}
-                disabled={isCheckingOut}
-                className="mt-10 inline-block rounded-xl bg-gold px-10 py-4 font-sans text-base font-semibold text-background transition-all duration-300 hover:bg-gold-light hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
-              >
-                {isCheckingOut ? "Redirecting..." : "Get Started"}
-              </button>
-
-              <p className="mt-4 font-sans text-xs text-subtle">
-                Or{" "}
-                <a href="#hero" className="text-gold hover:text-gold-light transition-colors">
-                  try the free demo above first
+              <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+                <a
+                  href="#demo"
+                  className="rounded-xl border border-gold/30 px-8 py-4 font-sans text-base font-semibold text-gold transition-all duration-300 hover:border-gold/60 hover:bg-gold/5"
+                >
+                  Try The Demo First
                 </a>
-              </p>
+                <button
+                  onClick={handleCheckout}
+                  disabled={isCheckingOut}
+                  className="rounded-xl bg-gold px-8 py-4 font-sans text-base font-semibold text-background transition-all duration-300 hover:bg-gold-light hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
+                >
+                  {isCheckingOut ? "Redirecting..." : "Get Started Now"}
+                </button>
+              </div>
             </div>
           </div>
         </ScrollReveal>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import { usePathname } from "next/navigation";
 import Vapi from "@vapi-ai/web";
 
 interface TranscriptEntry {
@@ -20,6 +21,13 @@ export default function DemoExperience({
   assistantId,
   businessName,
 }: DemoExperienceProps) {
+  const pathname = usePathname();
+  const priceLabel = pathname.includes("/1")
+    ? "$19/month"
+    : pathname.includes("/2")
+    ? "$29/month — 3-day trial"
+    : "$29/month";
+
   const [callStatus, setCallStatus] = useState<CallStatus>("idle");
   const [transcript, setTranscript] = useState<TranscriptEntry[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -319,7 +327,7 @@ export default function DemoExperience({
       {/* Bottom CTA — always visible */}
       <div className="shrink-0 pt-3 pb-1">
         <p className="text-center font-sans text-xs text-subtle mb-2">
-          Start for $29/month — cancel anytime
+          Start for {priceLabel} — cancel anytime
         </p>
         <button
           onClick={() => window.dispatchEvent(new Event("open-pricing-drawer"))}

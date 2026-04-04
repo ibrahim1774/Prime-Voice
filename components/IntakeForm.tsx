@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import LoadingOverlay from "./LoadingOverlay";
 
 interface FormData {
@@ -20,6 +20,7 @@ const MINIMUM_LOADING_TIME = 4500;
 
 export default function IntakeForm() {
   const router = useRouter();
+  const pathname = usePathname();
   const [formData, setFormData] = useState<FormData>({
     businessName: "",
     phoneNumber: "",
@@ -86,8 +87,10 @@ export default function IntakeForm() {
       }
 
       const data = await response.json();
+      const demoBase =
+        pathname === "/1" ? "/1/demo" : pathname === "/2" ? "/2/demo" : "/demo";
       router.push(
-        `/demo?assistantId=${data.assistantId}&businessName=${encodeURIComponent(data.businessName)}`
+        `${demoBase}?assistantId=${data.assistantId}&businessName=${encodeURIComponent(data.businessName)}`
       );
     } catch (err) {
       setIsLoading(false);

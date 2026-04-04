@@ -42,9 +42,9 @@ export default function StickyCartBar() {
   const isHomePage = pathname === "/";
 
   const priceConfig =
-    pathname === "/1"
+    pathname.startsWith("/1")
       ? { price: 19, label: "$19/mo", labelLong: "$19/month", trialDays: 0, trialText: "" }
-      : pathname === "/2"
+      : pathname.startsWith("/2")
       ? { price: 29, label: "$29/mo", labelLong: "$29/month", trialDays: 3, trialText: " — 3-day trial" }
       : { price: 29, label: "$29/mo", labelLong: "$29/month", trialDays: 0, trialText: "" };
 
@@ -91,7 +91,7 @@ export default function StickyCartBar() {
   return (
     <>
       {/* Sticky Bottom Bar */}
-      {!isHomePage && !pathname.startsWith("/demo") && (
+      {!isHomePage && !pathname.includes("/demo") && pathname !== "/1" && pathname !== "/2" && (
         <div
           className="fixed bottom-0 left-0 right-0 z-40 border-t border-gold/30 bg-background/95 backdrop-blur-md"
           style={{

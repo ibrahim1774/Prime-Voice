@@ -330,6 +330,11 @@ export default function DemoExperience({
 
       {/* Bottom CTA — always visible */}
       <div className="shrink-0 pt-3 pb-1">
+        {pathname.includes("/2") && (
+          <p className="text-center font-sans text-sm font-bold text-gold uppercase tracking-wider mb-2">
+            Start Your Free Trial
+          </p>
+        )}
         <p className="text-center font-sans text-xs text-subtle mb-2">
           Start for {priceLabel} — cancel anytime
         </p>

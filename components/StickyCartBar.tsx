@@ -214,6 +214,11 @@ export default function StickyCartBar() {
                 <p className="text-center font-sans text-xs text-subtle mb-4">
                   No setup fees • Takes 2 minutes
                 </p>
+                {priceConfig.trialDays > 0 && (
+                  <p className="text-center font-sans text-sm font-bold text-gold uppercase tracking-wider mb-2">
+                    Start Your Free Trial
+                  </p>
+                )}
                 <button
                   onClick={handleCheckout}
                   disabled={isCheckingOut}

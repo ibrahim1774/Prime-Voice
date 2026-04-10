@@ -179,17 +179,15 @@ export default function HeroSection() {
       <div className="relative z-10 mx-auto max-w-4xl w-full text-center">
         {/* Main headline */}
         <h1 className="font-serif text-3xl font-bold leading-[1.15] text-white sm:text-4xl md:text-5xl lg:text-6xl">
-          Your Custom Contracting AI Receptionist,{" "}
-          <span className="text-gold">Ready in 20 Seconds.</span>
+          Contractors: Stop missing calls. Start booking jobs —{" "}
+          <span className="text-gold">even at 2am.</span>
         </h1>
 
         {/* Subtext */}
         <p className="mx-auto mt-3 max-w-2xl font-sans text-sm leading-relaxed text-muted md:mt-4 md:text-base">
-          Every missed call is a potential missed job from $500 to maybe over
-          $10,000. Get A Custom AI receptionist, that can answer customers 24/7
-          and can help book more jobs automatically. See A Custom Live Demo In
-          About 20 Seconds On How It Can Potentially Work For Your Contracting
-          Business
+          An AI receptionist that answers your phone, talks to your customers,
+          and books jobs while you&apos;re on the job site. Enter your info
+          below and hear a live demo in about 20 seconds.
         </p>
 
         {/* Intake Form */}

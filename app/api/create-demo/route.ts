@@ -9,6 +9,7 @@ interface CreateDemoRequest {
   businessName: string;
   phoneNumber: string;
   industry: string;
+  voiceGender?: "female" | "male";
 }
 
 export async function POST(request: NextRequest) {
@@ -74,6 +75,10 @@ Return ONLY the system prompt text. No markdown formatting, no explanations, no 
     }
 
     // Step 2: Create Vapi assistant with the custom prompt
+    const voiceId = body.voiceGender === "male"
+      ? "iP95p4xoKVk53GoZ742B"  // Chris — casual, conversational male
+      : "paula";                  // Paula — female voice
+
     const vapiResponse = await fetch("https://api.vapi.ai/assistant", {
       method: "POST",
       headers: {
@@ -91,7 +96,7 @@ Return ONLY the system prompt text. No markdown formatting, no explanations, no 
         },
         voice: {
           provider: "11labs",
-          voiceId: "paula",
+          voiceId,
           model: "eleven_v3",
           stability: 0.25,
           similarityBoost: 0.88,

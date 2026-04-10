@@ -8,6 +8,7 @@ interface FormData {
   businessName: string;
   phoneNumber: string;
   industry: string;
+  voiceGender: "female" | "male";
 }
 
 interface FormErrors {
@@ -36,6 +37,7 @@ export default function IntakeForm() {
     businessName: "",
     phoneNumber: "",
     industry: "",
+    voiceGender: "female",
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [isLoading, setIsLoading] = useState(false);
@@ -93,6 +95,7 @@ export default function IntakeForm() {
             businessName: formData.businessName,
             phoneNumber: formData.phoneNumber,
             industry: formData.industry,
+            voiceGender: formData.voiceGender,
           }),
         }).catch(() => {}),
         new Promise((resolve) => setTimeout(resolve, MINIMUM_LOADING_TIME)),
@@ -191,6 +194,34 @@ export default function IntakeForm() {
                 {errors.industry}
               </p>
             )}
+          </div>
+
+          <div>
+            <p className="font-sans text-xs text-subtle mb-2">Voice</p>
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={() => setFormData((prev) => ({ ...prev, voiceGender: "female" as const }))}
+                className={`flex-1 rounded-lg py-2.5 font-sans text-sm font-medium transition-all duration-200 ${
+                  formData.voiceGender === "female"
+                    ? "bg-gold text-background"
+                    : "border border-white/[0.07] bg-charcoal/70 text-subtle hover:text-white"
+                }`}
+              >
+                Female
+              </button>
+              <button
+                type="button"
+                onClick={() => setFormData((prev) => ({ ...prev, voiceGender: "male" as const }))}
+                className={`flex-1 rounded-lg py-2.5 font-sans text-sm font-medium transition-all duration-200 ${
+                  formData.voiceGender === "male"
+                    ? "bg-gold text-background"
+                    : "border border-white/[0.07] bg-charcoal/70 text-subtle hover:text-white"
+                }`}
+              >
+                Male
+              </button>
+            </div>
           </div>
 
           {apiError && (

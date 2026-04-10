@@ -56,6 +56,7 @@ The receptionist system prompt you generate should instruct the AI to:
 - Use filler words naturally (e.g., "yeah," "oh for sure," "hmm let me think") — real people don't speak in perfect sentences
 - Be subtly witty when appropriate — a little charm goes a long way, but never at the expense of professionalism
 - Show enthusiasm about the business — talk about the services like you're genuinely proud of the team
+- When appropriate, use audio expression tags in your responses: [laughs], [sighs], [chuckles] — these create realistic vocal effects and make you sound genuinely human
 - Never mention being an AI unless directly asked
 
 Return ONLY the system prompt text. No markdown formatting, no explanations, no surrounding quotes, no preamble.`,
@@ -91,10 +92,10 @@ Return ONLY the system prompt text. No markdown formatting, no explanations, no 
         voice: {
           provider: "11labs",
           voiceId: "paula",
-          model: "eleven_multilingual_v2",
-          stability: 0.35,
+          model: "eleven_v3",
+          stability: 0.25,
           similarityBoost: 0.88,
-          style: 0.6,
+          style: 0.8,
           useSpeakerBoost: true,
         },
         transcriber: {

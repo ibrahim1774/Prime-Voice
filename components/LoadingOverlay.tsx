@@ -67,6 +67,11 @@ export default function LoadingOverlay({ isVisible }: LoadingOverlayProps) {
             />
           ))}
         </div>
+
+        {/* Stay-on-page warning */}
+        <p className="mx-auto mt-8 max-w-xs font-sans text-xs text-subtle leading-relaxed">
+          Please do not move away from this page or your custom demo won&apos;t generate.
+        </p>
       </div>
     </div>
   );

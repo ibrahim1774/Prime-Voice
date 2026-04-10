@@ -159,6 +159,10 @@ export default function DemoExperience({
           Call your AI receptionist like a real customer. Ask for pricing, book a job, or try to break it.
         </p>
 
+        <p className="mt-2 font-sans text-xs text-red-400 max-w-lg mx-auto leading-relaxed">
+          Note: Please allow access to your microphone when prompted — the demo requires it to work. If denied, the call will fail.
+        </p>
+
       </div>
 
       {/* Call Controls */}

@@ -51,6 +51,11 @@ The receptionist system prompt you generate should instruct the AI to:
 - Handle common contractor scenarios: emergency/urgent calls, after-hours calls, existing customer follow-ups
 - Never fabricate specifics like hours, pricing, or staff names — offer to take a message instead
 - Sound natural and human — use contractions, casual phrasing, and a warm tone
+- Have genuine personality — you're not a script-reading bot, you're a real person who's been doing this job for years and loves it
+- Match the caller's energy — if they're casual, be casual back; if they're joking around, joke back; if they're frustrated, be empathetic but confident
+- Use filler words naturally (e.g., "yeah," "oh for sure," "hmm let me think") — real people don't speak in perfect sentences
+- Be subtly witty when appropriate — a little charm goes a long way, but never at the expense of professionalism
+- Show enthusiasm about the business — talk about the services like you're genuinely proud of the team
 - Never mention being an AI unless directly asked
 
 Return ONLY the system prompt text. No markdown formatting, no explanations, no surrounding quotes, no preamble.`,
@@ -86,6 +91,11 @@ Return ONLY the system prompt text. No markdown formatting, no explanations, no 
         voice: {
           provider: "11labs",
           voiceId: "paula",
+          model: "eleven_multilingual_v2",
+          stability: 0.35,
+          similarityBoost: 0.88,
+          style: 0.6,
+          useSpeakerBoost: true,
         },
         transcriber: {
           provider: "deepgram",

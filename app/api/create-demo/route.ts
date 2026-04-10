@@ -8,7 +8,7 @@ const anthropic = new Anthropic({
 interface CreateDemoRequest {
   businessName: string;
   phoneNumber: string;
-  businessDescription: string;
+  industry: string;
 }
 
 export async function POST(request: NextRequest) {
@@ -22,9 +22,9 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-    if (!body.businessDescription?.trim()) {
+    if (!body.industry?.trim()) {
       return NextResponse.json(
-        { error: "Business description is required" },
+        { error: "Industry is required" },
         { status: 400 }
       );
     }
@@ -39,18 +39,17 @@ export async function POST(request: NextRequest) {
           content: `Generate a voice AI receptionist system prompt for the following business:
 
 Business Name: "${body.businessName}"
-Business Description: ${body.businessDescription}
+Industry: ${body.industry}
 
 The receptionist system prompt you generate should instruct the AI to:
 - Greet callers warmly using the business name "${body.businessName}"
-- Sound professional, friendly, and knowledgeable about the specific services they offer
-- Be able to answer common questions about their services based on the description provided
+- Sound professional, friendly, and knowledgeable about typical ${body.industry} services
+- Be able to answer common questions about services that a ${body.industry} business would typically offer (infer reasonable service categories, common issues, and scheduling needs for this trade)
 - Offer to schedule appointments or take a message with the caller's name and phone number
 - Politely defer specific pricing questions (e.g., "I'd be happy to have the team get you a detailed quote — can I get your name and number?")
 - Keep ALL responses short and conversational — 1 to 3 sentences maximum, since this is a voice conversation, not text
 - Handle common contractor scenarios: emergency/urgent calls, after-hours calls, existing customer follow-ups
-- Never fabricate information not provided in the business description
-- If unsure about something, offer to take a message so the owner can call back with details
+- Never fabricate specifics like hours, pricing, or staff names — offer to take a message instead
 - Sound natural and human — use contractions, casual phrasing, and a warm tone
 - Never mention being an AI unless directly asked
 

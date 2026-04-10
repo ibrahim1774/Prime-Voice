@@ -1,22 +1,33 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, useEffect, FormEvent } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import LoadingOverlay from "./LoadingOverlay";
 
 interface FormData {
   businessName: string;
   phoneNumber: string;
-  businessDescription: string;
+  industry: string;
 }
 
 interface FormErrors {
   businessName?: string;
   phoneNumber?: string;
-  businessDescription?: string;
+  industry?: string;
 }
 
 const MINIMUM_LOADING_TIME = 4500;
+
+const INDUSTRIES = [
+  "HVAC",
+  "Plumbing",
+  "Roofing",
+  "Electrical",
+  "Landscaping",
+  "Pest Control",
+  "Garage Doors",
+  "Painting",
+];
 
 export default function IntakeForm() {
   const router = useRouter();
@@ -24,11 +35,21 @@ export default function IntakeForm() {
   const [formData, setFormData] = useState<FormData>({
     businessName: "",
     phoneNumber: "",
-    businessDescription: "",
+    industry: "",
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [isLoading, setIsLoading] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
+  const [placeholderIndex, setPlaceholderIndex] = useState(0);
+  const [industryFocused, setIndustryFocused] = useState(false);
+
+  useEffect(() => {
+    if (industryFocused || formData.industry) return;
+    const id = setInterval(() => {
+      setPlaceholderIndex((i) => (i + 1) % INDUSTRIES.length);
+    }, 1800);
+    return () => clearInterval(id);
+  }, [industryFocused, formData.industry]);
 
   function validate(): boolean {
     const newErrors: FormErrors = {};
@@ -42,10 +63,8 @@ export default function IntakeForm() {
       newErrors.phoneNumber = "Enter a valid phone number";
     }
 
-    if (!formData.businessDescription.trim()) {
-      newErrors.businessDescription = "Tell us what your business does";
-    } else if (formData.businessDescription.trim().length < 20) {
-      newErrors.businessDescription = "Please provide a bit more detail (20+ characters)";
+    if (!formData.industry.trim()) {
+      newErrors.industry = "Tell us your industry";
     }
 
     setErrors(newErrors);
@@ -73,7 +92,7 @@ export default function IntakeForm() {
           body: JSON.stringify({
             businessName: formData.businessName,
             phoneNumber: formData.phoneNumber,
-            businessDescription: formData.businessDescription,
+            industry: formData.industry,
           }),
         }).catch(() => {}),
         new Promise((resolve) => setTimeout(resolve, MINIMUM_LOADING_TIME)),
@@ -156,17 +175,20 @@ export default function IntakeForm() {
           </div>
 
           <div>
-            <textarea
-              name="businessDescription"
-              placeholder="Type in here: What does your business do? (e.g., residential plumbing, HVAC repair, roofing, etc.)"
-              value={formData.businessDescription}
+            <input
+              type="text"
+              name="industry"
+              placeholder={`Industry — e.g. ${INDUSTRIES[placeholderIndex]}`}
+              value={formData.industry}
               onChange={handleChange}
-              rows={3}
-              className={inputClasses + " resize-none"}
+              onFocus={() => setIndustryFocused(true)}
+              onBlur={() => setIndustryFocused(false)}
+              className={inputClasses}
+              autoComplete="off"
             />
-            {errors.businessDescription && (
+            {errors.industry && (
               <p className="mt-1.5 text-sm text-red-400 font-sans">
-                {errors.businessDescription}
+                {errors.industry}
               </p>
             )}
           </div>

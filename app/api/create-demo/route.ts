@@ -76,8 +76,8 @@ Return ONLY the system prompt text. No markdown formatting, no explanations, no 
 
     // Step 2: Create Vapi assistant with the custom prompt
     const voiceId = body.voiceGender === "male"
-      ? "iP95p4xoKVk53GoZ742B"  // Chris — casual, conversational male
-      : "paula";                  // Paula — female voice
+      ? "95856005-0332-41b0-935f-352e296aa0df"
+      : "f786b574-daa5-4673-aa0c-cbe3e8534c02";
 
     const vapiResponse = await fetch("https://api.vapi.ai/assistant", {
       method: "POST",
@@ -95,13 +95,9 @@ Return ONLY the system prompt text. No markdown formatting, no explanations, no 
           maxTokens: 300,
         },
         voice: {
-          provider: "11labs",
+          provider: "cartesia",
           voiceId,
-          model: "eleven_v3",
-          stability: 0.25,
-          similarityBoost: 0.88,
-          style: 0.8,
-          useSpeakerBoost: true,
+          model: "sonic-3",
         },
         transcriber: {
           provider: "deepgram",

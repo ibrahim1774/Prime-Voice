@@ -4,6 +4,12 @@ import { useState, useEffect, FormEvent } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import LoadingOverlay from "./LoadingOverlay";
 
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void;
+  }
+}
+
 interface FormData {
   businessName: string;
   phoneNumber: string;
@@ -109,6 +115,12 @@ export default function IntakeForm() {
       }
 
       const data = await response.json();
+
+      // Fire Facebook Lead event
+      if (window.fbq) {
+        window.fbq("track", "Lead");
+      }
+
       const demoBase =
         pathname === "/1" ? "/1/demo" : pathname === "/2" ? "/2/demo" : pathname === "/4" ? "/4/demo" : "/demo";
       router.push(

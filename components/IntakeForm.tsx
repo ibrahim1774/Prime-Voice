@@ -110,7 +110,7 @@ export default function IntakeForm() {
 
       const data = await response.json();
       const demoBase =
-        pathname === "/1" ? "/1/demo" : pathname === "/2" ? "/2/demo" : "/demo";
+        pathname === "/1" ? "/1/demo" : pathname === "/2" ? "/2/demo" : pathname === "/4" ? "/4/demo" : "/demo";
       router.push(
         `${demoBase}?assistantId=${data.assistantId}&businessName=${encodeURIComponent(data.businessName)}`
       );

@@ -91,7 +91,7 @@ export default function StickyCartBar() {
   return (
     <>
       {/* Sticky Bottom Bar */}
-      {!isHomePage && !pathname.includes("/demo") && pathname !== "/1" && pathname !== "/2" && (
+      {!isHomePage && !pathname.includes("/demo") && pathname !== "/1" && pathname !== "/2" && !pathname.startsWith("/4") && (
         <div
           className="fixed bottom-0 left-0 right-0 z-40 border-t border-gold/30 bg-background/95 backdrop-blur-md"
           style={{

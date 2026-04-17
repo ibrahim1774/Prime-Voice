@@ -85,6 +85,15 @@ export default function IntakeForm() {
 
     if (!validate()) return;
 
+    const leadEventId = `lead_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
+
+    if (window.fbq) {
+      window.fbq("track", "Lead", {
+        content_name: formData.businessName,
+        content_category: formData.industry,
+      }, { eventID: leadEventId });
+    }
+
     setIsLoading(true);
 
     try {
@@ -104,6 +113,14 @@ export default function IntakeForm() {
             voiceGender: formData.voiceGender,
           }),
         }).catch(() => {}),
+        fetch("/api/meta-lead-conversion", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            phoneNumber: formData.phoneNumber,
+            eventId: leadEventId,
+          }),
+        }).catch(() => {}),
         new Promise((resolve) => setTimeout(resolve, MINIMUM_LOADING_TIME)),
       ]);
 
@@ -115,11 +132,6 @@ export default function IntakeForm() {
       }
 
       const data = await response.json();
-
-      // Fire Facebook Lead event
-      if (window.fbq) {
-        window.fbq("track", "Lead");
-      }
 
       const demoBase =
         pathname === "/1" ? "/1/demo" : pathname === "/2" ? "/2/demo" : pathname === "/4" ? "/4/demo" : "/demo";
